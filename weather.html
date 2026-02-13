@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+  </head>
+
+  <style>
+    body {
+      background-color: #0d6efd;
+    }
+    div {
+      border-radius: 20px;
+      border: 1px solid black;
+      height: 200px;
+      width: 200px;
+      text-align: center;
+      padding-top: 30px;
+      margin-left: 650px;
+      margin-top: 250px;
+      background-color: rgb(216, 208, 208);
+    }
+  </style>
+  <body>
+    <script>
+      fetch(
+        "https://api.openweathermap.org/data/2.5/weather?q=modasa&units=metric&appid=3498cae6b7df44ff7956255f3030fe6d",
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          Display(data);
+        });
+
+      function Display(data) {
+        var div = document.createElement("div");
+
+        var name = document.createElement("h3");
+        name.innerHTML = "place  :" + data.name;
+
+        var temp = document.createElement("h3");
+        temp.innerHTML = "temp :" + data.main.temp + "°C";
+
+        let speed = document.createElement("h3");
+        speed.innerHTML = "Wind : " + data.wind.speed + " m/s";
+
+        div.append(name, temp, speed);
+        document.querySelector("body").append(div);
+      }
+    </script>
+  </body>
+</html>
